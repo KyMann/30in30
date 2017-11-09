@@ -59,6 +59,29 @@
 
 <script>
 
+    
+    function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+        const key = document.querySelector(`div[data-key="${e.keyCode}"]`)
+        if(!audio) return;
+        audio.currentTime = 0; //rewinds to start so that we can interrupt
+        audio.play(); //takes several seconds to play, no interrupting
+        //the animation is just css, .transition and .playing
+        key.classList.add('playing'); //key.addClass('playing') in Javascript
+        
+        //console.log(audio); // a pritn statement
+    }
+    
+    
+    function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; //skip other events
+    e.target.classList.remove('playing');
+    }
+    
+    
+    const keys = Array.from(document.querySelectorAll('.key')); //returns a  of key attributed
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition)); //arrow function
+    window.addEventListener('keydown', playSound);
 </script>
 
 
