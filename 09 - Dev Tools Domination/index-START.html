@@ -18,29 +18,47 @@
     }
 
     // Regular
-
+    console.log('hello');
     // Interpolated
-
+    console.log('Hello I am a %s string', 1)
+    console.log(`Hello I am ${1}`)
     // Styled
-
+    //console.log('%c Hello', 'font-size:50px; background:red; text-shadow:10px 10px 0 blue')
     // warning!
-
+    console.warn('Oh Nooo');
     // Error :|
-
+    console.error('Oh noo');
     // Info
-
+    console.info('Crocodiles eat 3 people per year');
     // Testing
-
+    console.assert(1 ===1, 'that is wrong!'); //only fires on false
     // clearing
-
+    console.clear();
     // Viewing DOM Elements
-
+    const p = document.querySelector('p');
+    console.log(p); //prints element
+    console.dir(p); //shows all the methods and properties on the element
     // Grouping together
-
+    console.clear();
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`); //group Collapsed begins collapsed
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`) //use same string as starting
+       });
     // counting
 
+    console.count('wes');
     // timing
+console.time('fetching data');
+fetch('https://api.github.com/users/wesbos')
+.then(data=> data.json())
+.then (data => {
+    console.timeEnd('fetching data');
+    console.log(data);
+});
 
+console.table(dogs) //assumes that the objects in the array have the same fields
   </script>
 </body>
 </html>

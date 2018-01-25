@@ -61,44 +61,83 @@
   -->
   <div class="inbox">
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="0">
       <p>This is an inbox layout.</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="1">
       <p>Check one item</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="2">
       <p>Hold down your Shift key</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="3">
       <p>Check a lower item</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="4">
       <p>Everything inbetween should also be set to checked</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="5">
       <p>Try do it with out any libraries</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="6">
       <p>Just regular JavaScript</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="7">
       <p>Good Luck!</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input type="checkbox" id="8">
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
 
 <script>
+    let selectedBoxId = null;
+    let checkboxes = document.querySelectorAll('input');
+    checkboxes = Array.from(checkboxes);
+    checkboxes.forEach( checkbox => checkbox.addEventListener('click', checkboxSelectFun));
+    //every checkbox get's an arrap position and an event listener
+    
+    function checkboxSelectFun(e) {
+        
+        if (!e.shiftKey) {
+            selectedBoxId = e.target.id;
+            console.log(selectedBoxId);
+        }
+        if (e.shiftKey) {
+            newBoxId = e.target.id;
+            
+            var boxesToCheck = null;
+            if (newBoxId > selectedBoxId) {
+                boxesToCheck = checkboxes.filter(checkbox => checkbox.id> selectedBoxId && checkbox.id < newBoxId)}
+            if (selectedBoxId > newBoxId) {
+                boxesToCheck = checkboxes.filter(checkbox => checkbox.id> newBoxId && checkbox.id < selectedBoxId)}
+            boxesToCheck.forEach( checkbox => checkbox.checked = true);
+            selectedBoxId = newBoxId;
+            console.log(selectedBoxId, newBoxId)
+        }   
+    }
+    
+//on click event
+    //if no multiselect started
+        //if no box is checked
+            //do nothing
+        //if a box is checked
+            //get position of checked item#1
+            //start multiselect
+    //if multiselect started
+        //get position of checked item #2
+        //compare #1 and #2 to find the smaller one
+        //check every box between #1 and #2 incrementing up (user's choice) 
+
+
 </script>
 </body>
 </html>
